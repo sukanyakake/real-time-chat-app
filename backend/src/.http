@@ -6,3 +6,15 @@ Content-Type: application/json
   "email": "kdmrsukanya@gmail.com",
   "password":"sukanya"
 }
+
+###
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+5
+{
+  "email": "kdmrsukanya@gmail.com",
+  "password":"sukanya"
+}
+
+###
+POST http://localhost:3000/api/auth/logout
