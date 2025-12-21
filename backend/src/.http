@@ -20,3 +20,18 @@ Content-Type: application/json
 POST http://localhost:3000/api/auth/logout
 ###
 GET http://localhost:3000/api/auth/check
+
+###
+GET http://localhost:3000/api/message/contacts
+
+###
+POST http://localhost:3000/api/message/send/69453466e0043fc99a924d42
+Content-Type: application/json
+
+{
+  "text":"Hey Abhi how are you dooing?"
+}
+
+###
+GET http://localhost:3000/api/message/chats
+
