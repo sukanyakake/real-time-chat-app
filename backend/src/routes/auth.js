@@ -10,6 +10,6 @@ router.get("/test",(req,res)=>res.status(200).json({message:"Test "}))
 
 router.post("/login", login)
 router.post("/logout",logout)
-router.post("/update-profile",protectedRoute,updateProfile)
+router.put("/update-profile",protectedRoute,updateProfile)
 router.get("/check",protectedRoute,(req,res)=>res.status(200).json(req.user))
 export default router

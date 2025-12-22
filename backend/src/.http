@@ -25,11 +25,11 @@ GET http://localhost:3000/api/auth/check
 GET http://localhost:3000/api/message/contacts
 
 ###
-POST http://localhost:3000/api/message/send/69453466e0043fc99a924d42
+POST http://localhost:3000/api/message/send/6945351be0043fc99a924d46
 Content-Type: application/json
 
 {
-  "text":"Hey Abhi how are you dooing?"
+  "text":"Hey sukanya how are you dooing?"
 }
 
 ###
