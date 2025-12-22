@@ -36,11 +36,9 @@ login: async (data) => {
   set({ isLoggingIn: true });
   try {
     const res = await axiosInstance.post("/auth/login", data);
-    console.log(res)
     set({ authUser: res.data });
     toast.success("Logged in successfully");
   } catch (error) {
-    console.log(error);
     toast.error(
       error.response?.data?.message || "Login failed"
     );
