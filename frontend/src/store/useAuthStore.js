@@ -57,6 +57,16 @@ login: async (data) => {
     }finally{
         set({isLogout:false})
     }
+},
+updateProfile:async (data)=>{
+    try{
+        const res=await axiosInstance.put('/auth/update-profile',data)
+        set({authUser:res.data})
+        console.log("profile updated succesffully")
+        toast.success("Prfile updated successfully")
+    }catch(error){
+        toast.error(error.response.data.message)
+    }
 }
 
 }))
