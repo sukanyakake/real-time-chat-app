@@ -1,17 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect ,useRef} from 'react'
 import { useChatStore } from '../store/useChatStore'
 import { useAuthStore } from '../store/useAuthStore'
 import ChatHeader from './ChatHeader'
 import NoChatHistoryPlaceholder from './NoChatHistoryPlaceholder'
 import MessagesLoadingSkeleton from './MessagesLoadingSkeleton'
+import MessageInput from './MessageInput'
 
 
 const ChatContainer = () => {
   const {selectedUser,getMessagesByUserId,messages,isMessagesLoading}=useChatStore()
   const {authUser}=useAuthStore()
+  const messageEndRef=useRef(null)
   useEffect(()=>{
     getMessagesByUserId(selectedUser._id)
   },[getMessagesByUserId,selectedUser])
+
+  useEffect(()=>{
+    if(messageEndRef.current){
+      messageEndRef.current.scrollIntoView({behaviour:"smooth"})
+    }
+  })
   const AmOrPm=(date)=>{
     const hrs=date.getHours()
     if(hrs>12){
@@ -31,17 +39,25 @@ const ChatContainer = () => {
                   <div className={`chat-bubble relative ${msg.senderId===authUser._id?"bg-cyan-600 text-white":"bg-slate-800 text-slate-200"}`}>
                       {msg.image && (<img src={msg.image} alt="Shared" className="rounded-lg h-48 object-cover"/>)}
                       {msg.text && <p className='mt-2'>{msg.text}</p>}
-                      <p className='text-xs mt-1 opacity-75 flex items-center gap-1'>
-                        {`${new Date(msg.createdAt).toISOString().slice(11,16)} ${AmOrPm(new Date(msg.createdAt))}` }
-                      </p>
+                      <p className="text-xs mt-1 opacity-75">
+  {new Date(msg.createdAt).toLocaleTimeString(undefined, {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  })}
+</p>
+
                   </div>
                 </div>
             ))}
+            <div ref={messageEndRef}/>
           </div>
         ):isMessagesLoading?(
           <MessagesLoadingSkeleton/>
         ):(<NoChatHistoryPlaceholder name={selectedUser.fullName}/>)}
       </div>
+                  <MessageInput/>
+
     </>
   )
 }
